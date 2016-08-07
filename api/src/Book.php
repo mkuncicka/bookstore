@@ -5,12 +5,14 @@ class Book implements JsonSerializable
     private $id;
     private $name;
     private $author;
+    private $description;
 
-    public function __construct($name = "", $author = "", $id = -1)
+    public function __construct($name = "", $author = "", $description = "", $id = -1)
     {
         $this->id = $id;
         $this->name = $name;
         $this->author = $author;
+        $this->description = $description;
     }
 
     public function getId()
@@ -38,6 +40,16 @@ class Book implements JsonSerializable
         $this->author = $author;
     }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
     public static function loadFromDB($conn, $id)
     {
 
@@ -50,6 +62,7 @@ class Book implements JsonSerializable
         $book = new Book(
             $row['name'],
             $row['author'],
+            $row['description'],
             $row['id']
         );
         
@@ -71,6 +84,7 @@ class Book implements JsonSerializable
             $bookObj = new Book(
                 $book['name'],
                 $book['author'],
+                $book['description'],
                 $book['id']
             );
             $books[] = $bookObj;
@@ -82,9 +96,9 @@ class Book implements JsonSerializable
     public function save($conn)
     {
         if ($this->id == -1) {
-            $query = "INSERT INTO books (`name`, `author`) VALUES ('{$this->name}', '{$this->author}');";
+            $query = "INSERT INTO books (`name`, `author`, `description`) VALUES ('{$this->name}', '{$this->author}', '{$this->description}')";
         } else {
-            $query = "UPDATE books SET `name`='{$this->name}', `author`='{$this->author}' WHERE `id` = '{$this->id}'";
+            $query = "UPDATE books SET `name`='{$this->name}', `author`='{$this->author}', `description`='{$this->description}' WHERE `id` = '{$this->id}'";
         }
         $result = $conn->query($query);
 
@@ -115,6 +129,6 @@ class Book implements JsonSerializable
 
     function jsonSerialize()
     {
-        return [$this->id, $this->name, $this->author];
+        return [$this->name, $this->author, $this->description, $this->id];
     }
 };

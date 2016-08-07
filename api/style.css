@@ -1,0 +1,71 @@
+.container {
+    margin: 5%;
+    padding: 5px;
+}
+
+.info {
+    display: none;
+    margin-left: 30px;
+    padding: 10px;
+    background-color: lightgray;
+}
+
+.book_title {
+    background-color: lightgray;
+    display: inline;
+    padding: 10px;
+}
+
+.book {
+    background-color: lightgray;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.del_btn {
+    display:inline;
+    align-content: center;
+    margin: 10px;
+}
+
+.book_form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.book_form form {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.book_form label {
+    display: block;
+}
+
+.book_form textarea,input {
+    margin-right: 0;
+    width: 60%;
+}
+
+#submit {
+    display: block;
+}
+
+.show_form input {
+    width: 50px;
+}
+
+img {
+    float: left;
+    width: 3%;
+    height: 3%;
+}
+
+img:hover {
+    background-color: gray;
+}
+
+.show_form form {
+    padding: 10px;
+}

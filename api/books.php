@@ -1,9 +1,11 @@
 <?php
 header('Content-Type: application/json');
+require_once '../config.php';
 require_once 'src/db_connection.php';
 require_once 'src/Book.php';
 $conn = connectToDB();
 
+//part of code that is handling ajax
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['id'])) {
         $id = ($_GET['id']);
@@ -17,9 +19,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo($booksJS);
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['name']) && isset($_POST['author'])) {
-        $book = new Book($_POST['name'], $_POST['author']);
-        $save = $book->save($conn);
+    if ($_POST['name'] && $_POST['author'] && $_POST['description']) {
+        $book = new Book($_POST['name'], $_POST['author'], $_POST['description']);
+        $book->save($conn);
         $bookJS = json_encode(Book::loadFromDB($conn, $book->getId()));
         echo($bookJS);
     }
