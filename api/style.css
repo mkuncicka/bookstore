@@ -56,6 +56,10 @@
     width: 50px;
 }
 
+#edit_form {
+    visibility: hidden;
+}
+
 img {
     float: left;
     width: 3%;

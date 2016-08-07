@@ -50,7 +50,21 @@
         </form>
     </div>
 
-    <div id="titles"></div>
+    <div id="titles">
+
+    </div>
+    <div class="book_form" id="edit_form">
+        <form method = 'POST'>
+            <p>Formularz edycji</p>
+            <label for="edit_title">Tytuł:</label>
+            <input type="text" id="edit_title">
+            <label for="edit_author">Autor:</label>
+            <input type="text" id="edit_author">
+            <label for="edit_description">Opis:</label>
+            <textarea id="edit_description"></textarea>
+            <button type="submit" id="edit_submit" data-id="0">Zapisz zmiany</button>
+        </form>
+    </div>
 
 </div>
 </body>

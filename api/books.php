@@ -31,4 +31,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
         Book:: deleteFromDB($conn, $del_vars['id']);
         echo(json_encode("Deleted"));
     }
+} else if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    parse_str(file_get_contents("php://input"), $put_vars);
+    if (isset($put_vars['id'])) {
+        $book = new Book($put_vars['name'], $put_vars['author'], $put_vars['description'], $put_vars['id']);
+        $book->save($conn);
+        echo(json_encode("Updated"));
+    }
 }
