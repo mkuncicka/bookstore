@@ -45,14 +45,32 @@ $(function() {
     })
 
     //shows one book by select
-    select.on("change", function() {
+    select.on("change", function(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         var id = $("select").val();
         form.css('visibility', 'hidden');
         titles.children().remove();
-        showOneBook(id);
+        var idStr = "id="+id;
+        $.ajax({
+            url: "api/books.php",
+            type: "GET",
+            data: idStr,
+            dataType: "json"
+        }).done(function(response) {
+            response.forEach(function (resp) {
+                var book = new Book(resp[0], resp[1], resp[2], resp[3]);
+                    book.add();
+                    book.addDelEvents();
+                    book.addEditEvent();
+                    addTitleEvents();
+            })
+        }).fail(function () {
+            console.log("fail")
+        });
     });
 
-
+    //function that updates selection of titles
     function selectUpdate() {
         select.children().remove();
         $.ajax({
@@ -82,10 +100,11 @@ $(function() {
 
     //shows one book by id typed by user (after pressing the button)
     oneBook.on("click", function(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         var id = $("#id").val();
         form.css('visibility', 'hidden');
         titles.children().remove();
-        event.preventDefault();
         showOneBook(id);
     });
 
